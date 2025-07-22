@@ -6,9 +6,9 @@ app.use(express.json());
 // 代理转发接口（示例: /proxy?url=https://api.deepinfra.com/endpoint）
 app.all('/proxy', async (req, res) => {
   const targetUrl = req.query.url;
-  if (!targetUrl || !targetUrl.startsWith('https://api.deepinfra.com')) {
-    return res.status(400).send('Invalid or missing DeepInfra URL');
-  }
+  if (!targetUrl || !targetUrl.startsWith('http')) {
+  return res.status(400).send('Invalid or missing target URL');
+}
 
   try {
     const response = await axios({
